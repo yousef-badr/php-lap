@@ -38,7 +38,7 @@
         }
       }?> </span><br><br>
         <label for="">Select courses : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-        <select name="selector" id="" multiple>
+        <select name="selector[]" id="" multiple>
             <option value="PHP">PHP</option>
             <option value="Javascript">Javascript</option>
             <option value="MySQL">MySQL</option>
@@ -65,7 +65,11 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['group']) &&i
     echo "Group : ".$_POST['group']. '<br>';
     echo "Class details : ".$_POST['textarea']. '<br>';
     echo "Gender : ".$_POST['gender']. '<br>';
-    echo "Your courses are ".$_POST['selector']. '<br>';
+    if (!empty($_POST['selector'])) {
+      echo "Your courses are: " . implode(', ', $_POST['selector']) . '<br>';
+    } else {
+      echo "No courses selected.<br>";
+    }
 }elseif(isset($_POST['submit'])){
     $_POST['gender']='';
     $_POST['selector']='';
@@ -75,6 +79,10 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['group']) &&i
     echo "Group : ".$_POST['group']. '<br>';
     echo "Class details : ".$_POST['textarea']. '<br>';
     echo "Gender : ".$_POST['gender']. '<br>';
-    echo "Your courses are : ".$_POST['selector']. '<br>';   
+    if (!empty($_POST['selector'])) {
+      echo "Your courses are: " . implode(', ', $_POST['selector']) . '<br>';
+    } else {
+      echo "No courses selected.<br>";
+    } 
 }
 ?>
